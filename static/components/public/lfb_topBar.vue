@@ -1,0 +1,32 @@
+<template>
+	<div class="lfb_topBar">
+		<div class="goBack" onclick="javascript:history.go(-1)">返回</div>
+		乐富宝登录（路由演示）
+	</div>
+</template>
+
+<style lang="less">
+	.lfb_topBar{
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		color: #333;
+		font-size: 18px;
+		border-bottom: 1px solid #B2B2B2;
+		position: fixed;
+		top: 0;
+		left: 0;
+		.goBack{
+			font-size: 17px;
+			position: absolute;
+			left: 0.4rem;
+			top: 0;
+			height: 100%;
+			line-height: 50px;
+			background: url(../image/search_left.png) no-repeat left center;
+			background-size: 11px 12px;
+			padding-left: 17px;
+		}
+	}
+</style>

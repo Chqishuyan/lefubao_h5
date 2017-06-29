@@ -1,0 +1,152 @@
+<template>
+<div>
+	<transition name="opacityIn">
+		<div class="lfb_vue_comfirmBg" v-if="comfirm_show"></div>
+	</transition>
+
+	<transition name="fade">
+		<div class="lfb_vue_comfirmBox" v-if="comfirm_show">
+			<slot></slot>
+			<div class="footer">
+				<a href="javascript:;" @click="closeBox">取消</a>
+				<a href="javascript:;" @click="comfirmBox">确定</a>
+			</div>
+		</div>
+	</transition>
+</div>
+</template>
+
+<script>
+	export default{
+		data(){
+			return {
+				isShow:false
+			}
+		},
+		props:{
+			comfirm_show:false
+		},
+		methods:{
+			closeBox(){
+				this.isShow = false;
+				this.$emit("comfirm_toggle",this.isShow);
+				this.addDrag()
+			},
+			comfirmBox(){
+				this.isShow = false;
+				this.$emit("comfirm_success",this.isShow);
+				this.addDrag();
+			},
+			addDrag(){
+				$(document).unbind('touchmove');
+			}
+		}
+	}
+</script>
+
+<style lang="less">
+
+	.lfb_vue_comfirmBg{
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		z-index: 200;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,0.6);
+		-webkit-transition-duration: .3s;
+		transition-duration: .3s;
+	}
+
+	.lfb_vue_comfirmBox{
+		width: 88%;
+		position: fixed;
+		background: #fff;
+		border-radius: 5px;
+		top: 50%;
+		left: 50%;
+		-webkit-transform:translate(-50%,-80%);
+		transform:translate(-50%,-80%);
+		z-index: 300;
+		h2{
+			height: 60px;
+			text-align: center;
+			font-size: 16px;
+			color: #333;
+			line-height: 60px;
+		}
+		.body{
+			width: 92%;
+			margin: 0 auto;
+			text-align: center;
+			padding: 0 0 20px;
+			div{
+				font-size: 16px;
+				color: #666;
+				line-height: 20px;
+				p{
+					width: 96%;
+					margin: 0 auto;
+					font-size: 13px;
+					color: #666;
+					line-height: 20px;
+					text-align: left;
+					text-align: justify;
+					margin-bottom: 5px;
+					&.center{
+						text-align: center;
+					}
+					span{
+						color: #ff5865;
+					}
+				}
+
+
+			}
+		}
+		.footer{
+			width: 100%;
+			height: 50px;
+			clear: both;
+			border-top: 1px solid #e5e5e5;
+			a{
+				display: block;
+				height: 100%;
+				line-height: 50px;
+				width: 50%;
+				float: left;
+				font-size: 16px;
+				text-align: center;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				&:first-child{
+					border-right: 1px solid #e5e5e5;
+					color: #ff5865;
+				}
+				&:last-child{
+					color: #333;
+				}
+			}
+		}
+	}
+
+	
+
+	.opacityIn-enter-active, .opacityIn-leave-active{
+		transition: all .3s ease;
+	}
+
+	.opacityIn-enter{
+	    opacity: 0;
+	}
+
+	.fade-enter-active, .fade-leave-active{
+		transition: all .5s ease;
+		opacity: 1;
+	}
+
+	.fade-enter,.fade-leave-active{
+	  opacity: 0
+	}
+
+</style>

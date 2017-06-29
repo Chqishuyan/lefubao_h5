@@ -1,0 +1,59 @@
+@import url("base.less");
+
+.contain{
+	width: 100%;
+	overflow: hidden;
+	margin-top: 50px;
+	.register_table{
+		width: 100%;
+		background: #f2f2f2;
+		border-radius: 5px;
+		margin-bottom: 30px;
+		table{
+			width: 94%;
+			margin: 0 auto;
+			tr{
+				&:last-child{
+					td{
+						border-bottom: none;
+					}
+				}
+				td{
+					width: 100%;
+					height: 48px;
+					border-bottom: 1px solid #e5e5e5;
+					box-sizing:border-box;
+					input{
+						width: 96%;
+						height: 100%;
+						font-size: 15px;
+						color: #333;
+					}
+				}
+			}
+		}
+	}
+	.subBtn{
+		width: 100%;
+		button{
+			width: 100%;
+			height: 48px;
+			background: @red;
+			font-size: 18px;
+			color: #fff;
+			text-align: center;
+			line-height: 48px;
+			border-radius: 5px;
+		}
+		p{
+			width: 100%;
+			display: flex;
+			justify-content:space-between;
+			a{
+				font-size: 15px;
+				color: #333;
+				margin-top: 16px;
+			}
+		}
+	}
+}

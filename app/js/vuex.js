@@ -1,19 +1,15 @@
-webpackJsonp([3],[
-/* 0 */,
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */,
-/* 5 */
+webpackJsonp([3],{
+
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(17);
+var content = __webpack_require__(25);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(12)(content, {});
+var update = __webpack_require__(17)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -30,51 +26,227 @@ if(false) {
 }
 
 /***/ }),
-/* 6 */,
-/* 7 */,
-/* 8 */,
-/* 9 */
+
+/***/ 19:
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
 
-/* styles */
-__webpack_require__(31)
 
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(15),
-  /* template */
-  __webpack_require__(26),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/monica/Desktop/lefubao_h5/static/components/public/comfirmBox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] comfirmBox.vue: functional components are not supported with templates, they should use render functions.")}
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.comfirm_success = exports.comfirm_toggle = exports.addDrag = exports.comfirmBox = exports.closeBox = undefined;
 
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-39303dc6", Component.options)
-  } else {
-    hotAPI.reload("data-v-39303dc6", Component.options)
-  }
-})()}
+var _mutationTypes = __webpack_require__(5);
 
-module.exports = Component.exports
+var types = _interopRequireWildcard(_mutationTypes);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+//机具查询列表；
+var closeBox = exports.closeBox = function closeBox(_ref) {
+	var commit = _ref.commit;
+
+	commit(types.closeBox);
+};
+var comfirmBox = exports.comfirmBox = function comfirmBox(_ref2) {
+	var commit = _ref2.commit;
+
+	commit(types.comfirmBox);
+};
+var addDrag = exports.addDrag = function addDrag(_ref3) {
+	var commit = _ref3.commit;
+
+	commit(types.addDrag);
+};
+
+//机具查询列表；
+var comfirm_toggle = exports.comfirm_toggle = function comfirm_toggle(_ref4) {
+	var commit = _ref4.commit;
+
+	commit(types.comfirm_toggle);
+};
+var comfirm_success = exports.comfirm_success = function comfirm_success(_ref5) {
+	var commit = _ref5.commit;
+
+	commit(types.comfirm_success);
+};
+
+/***/ }),
+
+/***/ 20:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var checkStatus = exports.checkStatus = function checkStatus(state) {
+	state.testData;
+};
+
+/***/ }),
+
+/***/ 22:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _mutations;
+
+var _mutationTypes = __webpack_require__(5);
+
+var types = _interopRequireWildcard(_mutationTypes);
+
+var _common = __webpack_require__(6);
+
+var base = _interopRequireWildcard(_common);
+
+var _apiConfig = __webpack_require__(8);
+
+var _apiConfig2 = _interopRequireDefault(_apiConfig);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var state = {
+    posList: [],
+    comfirm_show: false,
+    testData: 1
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, types.loadData, function (state) {
+    base.useAjax({
+        url: _apiConfig2.default.ip + "pos/findPosList",
+        data: {
+            loginKey: base.getUrlParam("LOGINKEY"),
+            pageNum: 1,
+            posSn: "",
+            status: "",
+            sign: base.useMd5([{ loginKey: base.getUrlParam("LOGINKEY") }, { pageNum: 1 }, { posSn: "" }, { status: "" }])
+        },
+        success: function success(data) {
+            console.log(data);
+            data.data.map(function (el, index) {
+                state.posList.push(el);
+            });
+        }
+    });
+}), _defineProperty(_mutations, types.comfirm_toggle, function (state) {
+    state.comfirm_show = !state.comfirm_show;
+    $(document).bind('touchmove', function (e) {
+        e.preventDefault();
+    });
+}), _defineProperty(_mutations, types.comfirm_success, function (state) {
+    state.comfirm_show = false;
+    $(document).unbind('touchmove');
+    alert("执行成功的回调");
+}), _mutations);
+
+exports.default = {
+    state: state,
+    mutations: mutations
+};
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, ".posQuery {\n  width: 100%;\n}\n.posQuery ul li {\n  padding: 15px 0;\n  background: #fff;\n  margin-top: 10px;\n  width: 96%;\n  padding-left: 4%;\n  position: relative;\n}\n.posQuery ul li p {\n  font-size: 14px;\n  color: #333;\n}\n.posQuery ul li span {\n  color: #999;\n  display: block;\n  margin-top: 3px;\n  font-size: 12px;\n}\n.posQuery ul li a {\n  background: #ff5865;\n  border-radius: 5px;\n  padding: 0 5px;\n  height: 28px;\n  line-height: 28px;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 4%;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n}\n", ""]);
+
+// exports
 
 
 /***/ }),
-/* 10 */,
-/* 11 */,
-/* 12 */,
-/* 13 */
+
+/***/ 49:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _store = __webpack_require__(9);
+
+var _store2 = _interopRequireDefault(_store);
+
+var _vuex = __webpack_require__(7);
+
+var _vue = __webpack_require__(2);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _comfirmBox = __webpack_require__(61);
+
+var _comfirmBox2 = _interopRequireDefault(_comfirmBox);
+
+__webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var vm = new _vue2.default({
+	el: "#root",
+	store: _store2.default,
+	mounted: function mounted() {
+		_store2.default.commit('loadData');
+	},
+
+	computed: _extends({}, (0, _vuex.mapState)({
+		posList: function posList(state) {
+			return state.posQuery.posList;
+		},
+		comfirm_show: function comfirm_show(state) {
+			return state.posQuery.comfirm_show;
+		},
+		testData: function testData(state) {
+			return state.posQuery.testData;
+		}
+	}), (0, _vuex.mapGetters)(['checkStatus'])),
+	methods: _extends({}, (0, _vuex.mapActions)(['comfirm_toggle', 'comfirm_success'])),
+	components: {
+		comfirmBox: _comfirmBox2.default
+	}
+});
+
+/***/ }),
+
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+//机具查询列表；
+var loadData = exports.loadData = "loadData";
+var comfirm_toggle = exports.comfirm_toggle = "comfirm_toggle";
+var comfirm_success = exports.comfirm_success = "comfirm_success";
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -85,7 +257,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParam = exports.tips = exports.clearCookie = exports.getCookie = exports.setCookie = exports.useMd5 = exports.loading = exports.useAjax = undefined;
 
-var _md = __webpack_require__(37);
+var _md = __webpack_require__(44);
 
 var _md2 = _interopRequireDefault(_md);
 
@@ -267,8 +439,47 @@ var getUrlParam = exports.getUrlParam = function getUrlParam(name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1), __webpack_require__(1)))
 
 /***/ }),
-/* 14 */,
-/* 15 */
+
+/***/ 61:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(65)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(62),
+  /* template */
+  __webpack_require__(64),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/monica/Documents/workspace/lefubao_h5/static/components/public/comfirmBox/comfirmBox.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] comfirmBox.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-32a0c4ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-32a0c4ee", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -295,6 +506,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+
 
 exports.default = {
 	data: function data() {
@@ -325,24 +537,8 @@ exports.default = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 16 */,
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, ".posQuery {\n  width: 100%;\n}\n.posQuery ul li {\n  padding: 15px 0;\n  background: #fff;\n  margin-top: 10px;\n  width: 96%;\n  padding-left: 4%;\n  position: relative;\n}\n.posQuery ul li p {\n  font-size: 14px;\n  color: #333;\n}\n.posQuery ul li span {\n  color: #999;\n  display: block;\n  margin-top: 3px;\n  font-size: 12px;\n}\n.posQuery ul li a {\n  background: #ff5865;\n  border-radius: 5px;\n  padding: 0 5px;\n  height: 24px;\n  line-height: 24px;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 4%;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 18 */,
-/* 19 */,
-/* 20 */
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -356,12 +552,8 @@ exports.push([module.i, "\n.lfb_vue_comfirmBg {\n  width: 100%;\n  height: 100%;
 
 
 /***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */
+
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -399,32 +591,29 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-39303dc6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-32a0c4ee", module.exports)
   }
 }
 
 /***/ }),
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */
+
+/***/ 65:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(63);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5d477fda", content, false);
+var update = __webpack_require__(4)("fd771fa6", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-39303dc6!../../../node_modules/less-loader/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-39303dc6!../../../node_modules/less-loader/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-32a0c4ee!../../../../node_modules/less-loader/index.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-32a0c4ee!../../../../node_modules/less-loader/index.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -434,15 +623,8 @@ if(false) {
 }
 
 /***/ }),
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */
+
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -450,225 +632,30 @@ if(false) {
 
 var ENV = "pro"; //设置环境
 
-var API_HTTP = "";
+var ip = "";
 
-var apiIp = [{
-  "env": "testA",
-  "http": "http://10.10.111.147:8084/alliance-front/"
-}, {
-  "env": "testB",
-  "http": "http://10.10.129.26:8084/alliance-front/"
-}, {
-  "env": "pro",
-  "http": "https://v.lefu8.com/alliance-front/"
-}];
+switch (ENV) {
+	case "pro":
+		ip = "https://v.lefu8.com/alliance-front/";
+		break;
+	case "testA":
+		ip = "http://10.10.111.147:8084/alliance-front/";
+		break;
+	case "testB":
+		ip = "http://10.10.129.26:8084/alliance-front/";
+		break;
+}
 
-apiIp.map(function (el, index) {
-  if (ENV == el.env) {
-    API_HTTP = el.http;
-  }
-});
-
-console.log({ env: ENV, ip: API_HTTP });
+console.log({ env: ENV, ip: ip });
 
 module.exports = {
-  env: ENV,
-  ip: API_HTTP
+	env: ENV,
+	ip: ip
 };
 
 /***/ }),
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _store = __webpack_require__(56);
-
-var _store2 = _interopRequireDefault(_store);
-
-var _vuex = __webpack_require__(35);
-
-var _vue = __webpack_require__(2);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _comfirmBox = __webpack_require__(9);
-
-var _comfirmBox2 = _interopRequireDefault(_comfirmBox);
-
-__webpack_require__(5);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var vm = new _vue2.default({
-	el: "#root",
-	store: _store2.default,
-	mounted: function mounted() {
-		_store2.default.commit('loadData');
-	},
-
-	computed: _extends({}, (0, _vuex.mapState)({
-		posList: function posList(state) {
-			return state.posQuery.posList;
-		},
-		comfirm_show: function comfirm_show(state) {
-			return state.posQuery.comfirm_show;
-		}
-	}), (0, _vuex.mapGetters)(['checkStatus'])),
-	methods: _extends({}, (0, _vuex.mapActions)(['comfirm_toggle', 'comfirm_success'])),
-	components: {
-		comfirmBox: _comfirmBox2.default
-	}
-});
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.comfirm_success = exports.comfirm_toggle = undefined;
-
-var _mutationTypes = __webpack_require__(48);
-
-var types = _interopRequireWildcard(_mutationTypes);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-//机具查询列表；
-var comfirm_toggle = exports.comfirm_toggle = function comfirm_toggle(_ref) {
-	var commit = _ref.commit;
-
-	commit(types.comfirm_toggle);
-};
-var comfirm_success = exports.comfirm_success = function comfirm_success(_ref2) {
-	var commit = _ref2.commit;
-
-	commit(types.comfirm_success);
-};
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var getters = exports.getters = {
-    checkStatus: function checkStatus(state) {
-        state.posList.filter(function () {
-            console.log(1);
-        });
-    }
-};
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _mutations;
-
-var _mutationTypes = __webpack_require__(48);
-
-var types = _interopRequireWildcard(_mutationTypes);
-
-var _common = __webpack_require__(13);
-
-var base = _interopRequireWildcard(_common);
-
-var _apiConfig = __webpack_require__(40);
-
-var _apiConfig2 = _interopRequireDefault(_apiConfig);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var state = {
-    posList: [],
-    comfirm_show: false
-};
-
-var mutations = (_mutations = {}, _defineProperty(_mutations, types.loadData, function (state) {
-    base.useAjax({
-        url: _apiConfig2.default.ip + "pos/findPosList",
-        data: {
-            loginKey: base.getUrlParam("LOGINKEY"),
-            pageNum: 1,
-            posSn: "",
-            status: "",
-            sign: base.useMd5([{ loginKey: base.getUrlParam("LOGINKEY") }, { pageNum: 1 }, { posSn: "" }, { status: "" }])
-        },
-        success: function success(data) {
-            console.log(data);
-            data.data.map(function (el, index) {
-                state.posList.push(el);
-            });
-        }
-    });
-}), _defineProperty(_mutations, types.comfirm_toggle, function (state) {
-    state.comfirm_show = !state.comfirm_show;
-    $(document).bind('touchmove', function (e) {
-        e.preventDefault();
-    });
-}), _defineProperty(_mutations, types.comfirm_success, function (state) {
-    state.comfirm_show = false;
-    $(document).unbind('touchmove');
-    alert("执行成功的回调");
-}), _mutations);
-
-exports.default = {
-    state: state,
-    mutations: mutations
-};
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//机具查询列表；
-var loadData = exports.loadData = "loadData";
-var comfirm_toggle = exports.comfirm_toggle = "comfirm_toggle";
-var comfirm_success = exports.comfirm_success = "comfirm_success";
-
-/***/ }),
-/* 49 */,
-/* 50 */,
-/* 51 */,
-/* 52 */,
-/* 53 */,
-/* 54 */,
-/* 55 */,
-/* 56 */
+/***/ 9:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -682,19 +669,19 @@ var _vue = __webpack_require__(2);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _vuex = __webpack_require__(35);
+var _vuex = __webpack_require__(7);
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
-var _actions = __webpack_require__(45);
+var _actions = __webpack_require__(19);
 
 var actions = _interopRequireWildcard(_actions);
 
-var _getters = __webpack_require__(46);
+var _getters = __webpack_require__(20);
 
 var getters = _interopRequireWildcard(_getters);
 
-var _posQuery = __webpack_require__(47);
+var _posQuery = __webpack_require__(22);
 
 var _posQuery2 = _interopRequireDefault(_posQuery);
 
@@ -713,4 +700,5 @@ exports.default = new _vuex2.default.Store({
 });
 
 /***/ })
-],[44]);
+
+},[49]);

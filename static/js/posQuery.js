@@ -1,12 +1,12 @@
 import Vue from "vue";
 import * as base from "../libs/common.js";
-import comfirmBox from "../components/public/comfirmBox.vue";
+import comfirmBox from "../components/public/comfirmBox/comfirmBox.vue";
 import "../css/posQuery.less";
 
 const vm = new Vue({
 	el:"#root",
 	data:{
-		loginKey:"b5775777872d07591642d6acc4eb3ab6",
+		loginKey:base.getUrlParam("LOGINKEY"),
 		posList:[],
         comfirm_show:false
 	},

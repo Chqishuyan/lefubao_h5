@@ -45,6 +45,7 @@ var config = {
         loader: 'vue-loader',
         options: {
           loaders: {
+            'js': 'babel-loader?{"presets":["es2015"],"plugins": ["transform-object-rest-spread"]}',
             'less': 'vue-style-loader!css-loader!less-loader'
           }
         },
@@ -82,7 +83,6 @@ var config = {
       }
     ]
   },
-
   plugins: [
       new webpack.ProvidePlugin({ //这是把jquery挂到全局上，不用每个模块都去require
           "$": 'jquery',

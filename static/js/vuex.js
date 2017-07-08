@@ -1,7 +1,7 @@
 import store from "../vuex/store.js";
 import {mapState,mapGetters,mapActions} from "vuex";
 import Vue from "vue";
-import comfirmBox from "../components/public/comfirmBox.vue";
+import comfirmBox from "../components/public/comfirmBox/comfirmBox.vue";
 import "../css/posQuery.less";
 
 var vm = new Vue({
@@ -13,7 +13,8 @@ var vm = new Vue({
 	computed:{
 		...mapState({
 			posList: state => state.posQuery.posList,
-			comfirm_show: state => state.posQuery.comfirm_show
+			comfirm_show: state => state.posQuery.comfirm_show,
+			testData: state => state.posQuery.testData
 		}),
 		...mapGetters(['checkStatus'])
 	},

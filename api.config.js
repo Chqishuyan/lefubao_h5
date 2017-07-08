@@ -1,29 +1,20 @@
 
 var ENV = "pro"  //设置环境
 
-var API_HTTP = "";
+var ip = "";
 
-var apiIp = [{
- 	"env":"testA",
- 	"http":"http://10.10.111.147:8084/alliance-front/"
-},{
- 	"env":"testB",
- 	"http":"http://10.10.129.26:8084/alliance-front/"
-},{
- 	"env":"pro",
- 	"http":"https://v.lefu8.com/alliance-front/"
-}]
+switch(ENV){
+	case "pro": ip = "https://v.lefu8.com/alliance-front/";
+	break;
+	case "testA": ip = "http://10.10.111.147:8084/alliance-front/";
+	break;
+	case "testB": ip = "http://10.10.129.26:8084/alliance-front/";
+	break;
+}
 
-
-apiIp.map(function(el,index){
-	if(ENV == el.env){
-		API_HTTP = el.http;
-	}
-})
-
-console.log({env:ENV,ip:API_HTTP})
+console.log({env:ENV,ip:ip})
 
 module.exports = {
 	env:ENV,
-	ip:API_HTTP
+	ip:ip
 };

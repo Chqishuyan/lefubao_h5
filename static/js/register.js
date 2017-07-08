@@ -1,7 +1,7 @@
 import "../css/register.less";
 import Vue from "vue";
 import vueRouter from "vue-router";
-import lfbTopbar from "../components/public/lfb_topBar.vue";
+import lfbTopbar from "../components/public/lfb_topBar/lfb_topBar.vue";
 import login from "../components/login.vue";
 import register from "../components/register.vue";
 import forget from "../components/forget.vue";

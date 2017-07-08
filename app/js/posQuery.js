@@ -1,6 +1,121 @@
 webpackJsonp([4],{
 
-/***/ 13:
+/***/ 10:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(25);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(17)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/index.js!../../node_modules/postcss-loader/index.js!./posQuery.less", function() {
+			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/index.js!../../node_modules/postcss-loader/index.js!./posQuery.less");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 25:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)();
+// imports
+
+
+// module
+exports.push([module.i, ".posQuery {\n  width: 100%;\n}\n.posQuery ul li {\n  padding: 15px 0;\n  background: #fff;\n  margin-top: 10px;\n  width: 96%;\n  padding-left: 4%;\n  position: relative;\n}\n.posQuery ul li p {\n  font-size: 14px;\n  color: #333;\n}\n.posQuery ul li span {\n  color: #999;\n  display: block;\n  margin-top: 3px;\n  font-size: 12px;\n}\n.posQuery ul li a {\n  background: #ff5865;\n  border-radius: 5px;\n  padding: 0 5px;\n  height: 28px;\n  line-height: 28px;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 4%;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 46:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function($) {
+
+var _vue = __webpack_require__(2);
+
+var _vue2 = _interopRequireDefault(_vue);
+
+var _common = __webpack_require__(6);
+
+var base = _interopRequireWildcard(_common);
+
+var _comfirmBox = __webpack_require__(61);
+
+var _comfirmBox2 = _interopRequireDefault(_comfirmBox);
+
+__webpack_require__(10);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var vm = new _vue2.default({
+    el: "#root",
+    data: {
+        loginKey: base.getUrlParam("LOGINKEY"),
+        posList: [],
+        comfirm_show: false
+    },
+    mounted: function mounted() {
+
+        base.useAjax({
+            url: "https://v.lefu8.com/alliance-front/pos/findPosList",
+            type: "post",
+            data: {
+                loginKey: this.loginKey,
+                pageNum: 1,
+                posSn: "",
+                status: "",
+                sign: base.useMd5([{ loginKey: this.loginKey }, { pageNum: 1 }, { posSn: "" }, { status: "" }])
+            },
+            success: function success(data) {
+                console.log(data);
+                data.data.map(function (el, index) {
+                    vm.posList.push(el);
+                });
+            }
+        });
+    },
+
+    methods: {
+        comfirm_toggle: function comfirm_toggle() {
+            this.comfirm_show = !this.comfirm_show;
+            $(document).bind('touchmove', function (e) {
+                e.preventDefault();
+            });
+        },
+        comfirm_success: function comfirm_success() {
+            this.comfirm_show = false;
+            // $(document).unbind('touchmove');
+            alert("执行成功的回调");
+        }
+    },
+    components: {
+        comfirmBox: _comfirmBox2.default
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
+
+/***/ }),
+
+/***/ 6:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11,7 +126,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getUrlParam = exports.tips = exports.clearCookie = exports.getCookie = exports.setCookie = exports.useMd5 = exports.loading = exports.useAjax = undefined;
 
-var _md = __webpack_require__(37);
+var _md = __webpack_require__(44);
 
 var _md2 = _interopRequireDefault(_md);
 
@@ -194,7 +309,46 @@ var getUrlParam = exports.getUrlParam = function getUrlParam(name) {
 
 /***/ }),
 
-/***/ 15:
+/***/ 61:
+/***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(65)
+
+var Component = __webpack_require__(3)(
+  /* script */
+  __webpack_require__(62),
+  /* template */
+  __webpack_require__(64),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/monica/Documents/workspace/lefubao_h5/static/components/public/comfirmBox/comfirmBox.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] comfirmBox.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-32a0c4ee", Component.options)
+  } else {
+    hotAPI.reload("data-v-32a0c4ee", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 62:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -221,6 +375,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+
 
 exports.default = {
 	data: function data() {
@@ -252,22 +407,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 17:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(0)();
-// imports
-
-
-// module
-exports.push([module.i, ".posQuery {\n  width: 100%;\n}\n.posQuery ul li {\n  padding: 15px 0;\n  background: #fff;\n  margin-top: 10px;\n  width: 96%;\n  padding-left: 4%;\n  position: relative;\n}\n.posQuery ul li p {\n  font-size: 14px;\n  color: #333;\n}\n.posQuery ul li span {\n  color: #999;\n  display: block;\n  margin-top: 3px;\n  font-size: 12px;\n}\n.posQuery ul li a {\n  background: #ff5865;\n  border-radius: 5px;\n  padding: 0 5px;\n  height: 24px;\n  line-height: 24px;\n  color: #fff;\n  font-size: 12px;\n  position: absolute;\n  right: 4%;\n  top: 50%;\n  -webkit-transform: translateY(-50%);\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 20:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)();
@@ -282,7 +422,7 @@ exports.push([module.i, "\n.lfb_vue_comfirmBg {\n  width: 100%;\n  height: 100%;
 
 /***/ }),
 
-/***/ 26:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -320,29 +460,29 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-39303dc6", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-32a0c4ee", module.exports)
   }
 }
 
 /***/ }),
 
-/***/ 31:
+/***/ 65:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(20);
+var content = __webpack_require__(63);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("5d477fda", content, false);
+var update = __webpack_require__(4)("fd771fa6", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-39303dc6!../../../node_modules/less-loader/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-39303dc6!../../../node_modules/less-loader/index.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-32a0c4ee!../../../../node_modules/less-loader/index.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-rewriter.js?id=data-v-32a0c4ee!../../../../node_modules/less-loader/index.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./comfirmBox.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -351,145 +491,6 @@ if(false) {
  module.hot.dispose(function() { update(); });
 }
 
-/***/ }),
-
-/***/ 41:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function($) {
-
-var _vue = __webpack_require__(2);
-
-var _vue2 = _interopRequireDefault(_vue);
-
-var _common = __webpack_require__(13);
-
-var base = _interopRequireWildcard(_common);
-
-var _comfirmBox = __webpack_require__(9);
-
-var _comfirmBox2 = _interopRequireDefault(_comfirmBox);
-
-__webpack_require__(5);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var vm = new _vue2.default({
-    el: "#root",
-    data: {
-        loginKey: "b5775777872d07591642d6acc4eb3ab6",
-        posList: [],
-        comfirm_show: false
-    },
-    mounted: function mounted() {
-
-        base.useAjax({
-            url: "https://v.lefu8.com/alliance-front/pos/findPosList",
-            type: "post",
-            data: {
-                loginKey: this.loginKey,
-                pageNum: 1,
-                posSn: "",
-                status: "",
-                sign: base.useMd5([{ loginKey: this.loginKey }, { pageNum: 1 }, { posSn: "" }, { status: "" }])
-            },
-            success: function success(data) {
-                console.log(data);
-                data.data.map(function (el, index) {
-                    vm.posList.push(el);
-                });
-            }
-        });
-    },
-
-    methods: {
-        comfirm_toggle: function comfirm_toggle() {
-            this.comfirm_show = !this.comfirm_show;
-            $(document).bind('touchmove', function (e) {
-                e.preventDefault();
-            });
-        },
-        comfirm_success: function comfirm_success() {
-            this.comfirm_show = false;
-            // $(document).unbind('touchmove');
-            alert("执行成功的回调");
-        }
-    },
-    components: {
-        comfirmBox: _comfirmBox2.default
-    }
-});
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
-
-/***/ }),
-
-/***/ 5:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(17);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// add the styles to the DOM
-var update = __webpack_require__(12)(content, {});
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/index.js!../../node_modules/postcss-loader/index.js!./posQuery.less", function() {
-			var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/less-loader/index.js!../../node_modules/postcss-loader/index.js!./posQuery.less");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-
-/* styles */
-__webpack_require__(31)
-
-var Component = __webpack_require__(3)(
-  /* script */
-  __webpack_require__(15),
-  /* template */
-  __webpack_require__(26),
-  /* scopeId */
-  null,
-  /* cssModules */
-  null
-)
-Component.options.__file = "/Users/monica/Desktop/lefubao_h5/static/components/public/comfirmBox.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] comfirmBox.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-39303dc6", Component.options)
-  } else {
-    hotAPI.reload("data-v-39303dc6", Component.options)
-  }
-})()}
-
-module.exports = Component.exports
-
-
 /***/ })
 
-},[41]);
+},[46]);

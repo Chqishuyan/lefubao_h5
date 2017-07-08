@@ -21,7 +21,7 @@
             <div class="posQuery">
                 <ul>
                     <li v-for="item in posList">
-                        <p>序列号：{{item.posSn}}</p>
+                        <p>{{checkStatus}}序列号：{{item.posSn}}</p>
                         <!-- <span v-if="item.status=='ASSIGN'">分配</span>
                         <span v-else>未分配</span> -->
                         <span>{{item.status=='ASSIGN'?'分配':'未分配'}}</span>

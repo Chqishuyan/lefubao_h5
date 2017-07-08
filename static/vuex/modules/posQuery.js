@@ -4,7 +4,8 @@ import api from "../../../api.config.js";
 
 const state = {
 	posList:[],
-    comfirm_show:false
+    comfirm_show:false,
+    testData:1
 }
 
 const mutations = {

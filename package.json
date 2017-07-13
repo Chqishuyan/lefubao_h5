@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --quiet",
-    "build": "webpack --progress --hide-modules",
+    "build": "export NODE_ENV=build&&webpack --progress --hide-modules",
+    "test": "export NODE_ENV=test&&webpack --progress --colors --hide-modules",
     "pro": "export NODE_ENV=production&&webpack --progress --colors --hide-modules"
   },
   "dependencies": {

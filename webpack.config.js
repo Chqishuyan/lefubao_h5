@@ -3,6 +3,7 @@ var glob = require('glob');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CleanPlugin = require('clean-webpack-plugin');
 var server = require('./server.js');
 var api = require('./api.config.js');
@@ -12,8 +13,7 @@ var UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
 //console.log( api )
 
-var ENV = api.env; //配置环境，testA testB pro
-var debug = process.env.NODE_ENV !== 'production';
+var debug = process.env.NODE_ENV;
 
 var entries = getEntry('./static/js/*js',"static/js");
 entries.vendor = ['rem','jquery'];
@@ -26,7 +26,7 @@ var config = {
   output: {
     publicPath:'./',
     path: path.join(__dirname, '/app/'),
-    filename: debug?'js/[name].js':'js/[name].[chunkhash:8].js'
+    filename: debug=='build'?'js/[name].js':'js/[name].[chunkhash:8].js'
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -53,7 +53,7 @@ var config = {
       },
       {
         test: /\.less$/,
-        loader:debug?"style-loader!css-loader!less-loader!postcss-loader":ExtractTextPlugin.extract({
+        loader:debug=='build'?"style-loader!css-loader!less-loader":ExtractTextPlugin.extract({
           fallbackLoader:'style-loader',
           loader: ['css-loader','less-loader','postcss-loader'],
           publicPath:"../"
@@ -62,9 +62,9 @@ var config = {
       },
       {
         test: /\.css$/,
-        loader:debug?"style-loader!css-loader!postcss-loader!postcss-loader":ExtractTextPlugin.extract({
+        loader:debug=='build'?"style-loader!css-loader":ExtractTextPlugin.extract({
           fallbackLoader:'style-loader',
-          loader: ['css-loader','less-loader','postcss-loader']
+          loader: ['css-loader','less-loader','postcss-loader'],
         }),
         exclude: /node_modules/
       },
@@ -78,22 +78,29 @@ var config = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader:'url-loader?limit=1000&name=image/[name].[hash:8].[ext]',
+        loader:debug=="build"?'url-loader?limit=1000&name=image/[name].[ext]':'url-loader?limit=1000&name=image/[name].[hash:8].[ext]',
         exclude: /node_modules/
       }
     ]
   },
   plugins: [
+      debug=="build" ? function(){} : new CopyWebpackPlugin([{
+          from: __dirname + '/app/',
+          to:__dirname+"/release/"+debug+"_H5",
+          force: true
+      }],{
+          copyUnmodified: true
+      }),
       new webpack.ProvidePlugin({ //这是把jquery挂到全局上，不用每个模块都去require
           "$": 'jquery',
           "jQuery": 'jquery'
       }),
       //new webpack.HotModuleReplacementPlugin(), //热加载插件
       new ExtractTextPlugin({
-        filename:"css/[name].[chunkhash:8].css",
+        filename:debug=="build"?"css/[name].css":"css/[name].[chunkhash:8].css",
         allChunks: true
       }),
-      debug ? function() {} : new UglifyJsParallelPlugin({
+      debug=='build' ? function() {} : new UglifyJsParallelPlugin({
           workers: os.cpus().length,
           mangle: true,
           compressor: {
@@ -102,8 +109,8 @@ var config = {
               drop_debugger: true
           }
       }),
-      debug ? function(){} : new CleanPlugin(["js","css"],{
-          "root":__dirname+'/app/',
+      debug=="build" ? function(){} : new CleanPlugin(["app/js","app/css","app/image","release/"+debug+"_H5/css","release/"+debug+"_H5/js","release/"+debug+"_H5/image"],{
+          "root":path.resolve(__dirname),
           "dry": false,
           "exclude": ["libs","ocr","reset.css"]
       }),
@@ -115,10 +122,10 @@ var config = {
       }),
       new webpack.optimize.CommonsChunkPlugin({ 
           name: 'manifest'
-      }),
-      new webpack.DefinePlugin({
-          'process.ENV': JSON.stringify(ENV)
       })
+      // new webpack.DefinePlugin({
+      //     'process.ENV': JSON.stringify(ENV)
+      // })
   ],
   performance: {
     hints: false

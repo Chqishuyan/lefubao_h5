@@ -1,6 +1,7 @@
 import Vue from "vue";
 import * as base from "../libs/common.js";
 import comfirmBox from "../components/public/comfirmBox/comfirmBox.vue";
+
 import "../css/posQuery.less";
 
 const vm = new Vue({

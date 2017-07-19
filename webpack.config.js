@@ -15,6 +15,8 @@ var UglifyJsParallelPlugin = require('webpack-uglify-parallel');
 
 var debug = process.env.NODE_ENV;
 
+console.log( debug )
+
 var entries = getEntry('./static/js/*js',"static/js");
 entries.vendor = ['rem','jquery'];
 
@@ -26,7 +28,7 @@ var config = {
   output: {
     publicPath:'./',
     path: path.join(__dirname, '/app/'),
-    filename: debug=='build'?'js/[name].js':'js/[name].[chunkhash:8].js'
+    filename: (debug=='build'||debug=='dev')?'js/[name].js':'js/[name].[chunkhash:8].js'
   },
   resolve: {
     extensions: ['.js', '.vue'],
@@ -53,7 +55,7 @@ var config = {
       },
       {
         test: /\.less$/,
-        loader:debug=='build'?"style-loader!css-loader!less-loader":ExtractTextPlugin.extract({
+        loader:(debug=='build'||debug=='dev')?"style-loader!css-loader!less-loader":ExtractTextPlugin.extract({
           fallbackLoader:'style-loader',
           loader: ['css-loader','less-loader','postcss-loader'],
           publicPath:"../"
@@ -62,7 +64,7 @@ var config = {
       },
       {
         test: /\.css$/,
-        loader:debug=='build'?"style-loader!css-loader":ExtractTextPlugin.extract({
+        loader:(debug=='build'||debug=='dev')?"style-loader!css-loader":ExtractTextPlugin.extract({
           fallbackLoader:'style-loader',
           loader: ['css-loader','less-loader','postcss-loader'],
         }),
@@ -78,13 +80,13 @@ var config = {
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
-        loader:debug=="build"?'url-loader?limit=1000&name=image/[name].[ext]':'url-loader?limit=1000&name=image/[name].[hash:8].[ext]',
+        loader:(debug=='build'||debug=='dev')?'url-loader?limit=1000&name=image/[name].[ext]':'url-loader?limit=1000&name=image/[name].[hash:8].[ext]',
         exclude: /node_modules/
       }
     ]
   },
   plugins: [
-      debug=="build" ? function(){} : new CopyWebpackPlugin([{
+      (debug=='build'||debug=='dev') ? function(){} : new CopyWebpackPlugin([{
           from: __dirname + '/app/',
           to:__dirname+"/release/"+debug+"_H5",
           force: true
@@ -97,10 +99,10 @@ var config = {
       }),
       //new webpack.HotModuleReplacementPlugin(), //热加载插件
       new ExtractTextPlugin({
-        filename:debug=="build"?"css/[name].css":"css/[name].[chunkhash:8].css",
+        filename:(debug=='build'||debug=='dev')?"css/[name].css":"css/[name].[chunkhash:8].css",
         allChunks: true
       }),
-      debug=='build' ? function() {} : new UglifyJsParallelPlugin({
+      (debug=='build'||debug=='dev') ? function() {} : new UglifyJsParallelPlugin({
           workers: os.cpus().length,
           mangle: true,
           compressor: {
@@ -109,7 +111,7 @@ var config = {
               drop_debugger: true
           }
       }),
-      debug=="build" ? function(){} : new CleanPlugin(["app/js","app/css","app/image","release/"+debug+"_H5/css","release/"+debug+"_H5/js","release/"+debug+"_H5/image"],{
+      (debug=='build'||debug=='dev') ? function(){} : new CleanPlugin(["app/js","app/css","app/image","release/"+debug+"_H5/css","release/"+debug+"_H5/js","release/"+debug+"_H5/image"],{
           "root":path.resolve(__dirname),
           "dry": false,
           "exclude": ["libs","ocr","reset.css"]

@@ -1,0 +1,72 @@
+body, h1, h2, h3, p, dl, dd, ol, ul, th, td, form, fieldset, input, button, textarea { margin: 0; padding: 0; }
+html { word-wrap: break-word; min-height: 100%;}
+body { min-height: 100%; font-family: "Microsoft YaHei"; position: relative; background: #fff;}
+ol, ul { list-style: none outside none; }
+table { border-collapse: collapse; border-spacing: 0; empty-cells: show; font-size: inherit; }
+fieldset, img { border: 0 none; }
+cite, em, s, i, b { font-style: normal; }
+input, button, textarea, select { font-size: 100%; background-color: transparent; }
+body, input, button, textarea, select, option {}
+a, input, textarea { outline: 0 none; text-decoration:none;}
+li, img, label, input { vertical-align: middle; }
+h1, h2, h3, h4, h5, h6, img, p, dl, dd, ol, ul, th, td, form, em, i, div, a, b, li, label,small{
+  -webkit-touch-callout:none;
+  // -webkit-user-select:none;
+  // -khtml-user-select:none;
+  // -moz-user-select:none;
+  // -ms-user-select:none;
+  // user-select:none;
+  // -o-user-select:none;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  -moz-tap-highlight-color:rgba(0,0,0,0); 
+}
+html,body{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.grey{
+  background: #f2f2f2;
+}
+
+a{-webkit-tap-highlight-color: transparent;}
+
+.clear:after{ content: ""; display: block; clear: both;}
+.fl{ float: left;}
+.fr{ float: right;}
+
+input[type="text"],input[type="password"],input[type="number"],input[type="button"],select,textarea{
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none; 
+    outline:none; 
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    -moz-tap-highlight-color:rgba(0,0,0,0); 
+    border-radius:0;
+  }
+
+.red{ color: #ff5865;}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number]::-moz-inner-spin-button,
+input[type=number]::-moz-outer-spin-button {
+    -moz-appearance: none;
+    margin: 0;
+}
+
+input::-webkit-input-placeholder{
+    font-weight: 100;
+    color: #cccccc;
+}
+
+[v-cloak]{display:none}
+
+.lfb_one_blank{width: 100%; height: 0.32rem; background: #f6f6fa; clear: both}
+.lfb_line{width: 100%; height: 1px; border-bottom: 1px solid #e5e5e5; clear: both}
+.lfb_two_blank{width: 100%; height: 0.32rem; background: #f2f2f2; clear: both}
+

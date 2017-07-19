@@ -5,21 +5,26 @@ import api from "../../../api.config.js";
 const state = {
 	posList:[],
     comfirm_show:false,
-    testData:1
+    testData:1,
+    page:""
 }
 
 const mutations = {
 	[types.loadData](state){
+
+        state.posList = [];
+        state.page = 1;
+
 		base.useAjax({
 			url:api.ip+"pos/findPosList",
 			data:{
             	loginKey:base.getUrlParam("LOGINKEY"),
-                pageNum:1,
+                pageNum:state.page,
                 posSn:"",
                 status:"",
                 sign:base.useMd5([
                     {loginKey:base.getUrlParam("LOGINKEY")},
-                    {pageNum:1},
+                    {pageNum:state.page},
                     {posSn:""},
                     {status:""}
                 ])

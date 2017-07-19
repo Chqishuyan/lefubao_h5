@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>机具查询</title>
+    <title>vue-scroller</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-cache">
@@ -18,7 +18,10 @@
 <body style="background: #f2f2f2">
 	<div id="root">
         <div class="lfb" v-cloak>
-            <div id="wrap">
+
+            <scroller :on-refresh="refresh"
+            :on-infinite="infinite" ref="myScroller">
+            
                 <div class="posQuery">
                     <ul>
                         <li v-for="item in posList">
@@ -30,14 +33,8 @@
                         </li>      
                     </ul>
                 </div>
-            </div>
+            </scroller> 
             
-            <infinite-loading :on-infinite="onInfinite" :distance="distance" ref="infiniteLoading" spinner="waveDots">
-            <span slot="no-more">
-               已经没有更多了
-            </span>
-            </infinite-loading>
-
             <comfirm-box
                 @comfirm_toggle="comfirm_toggle"
                 @comfirm_success="comfirm_success" 

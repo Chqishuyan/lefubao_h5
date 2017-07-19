@@ -18,17 +18,21 @@
 <body style="background: #f2f2f2">
     <div id="root">
         <div class="lfb" v-cloak>
-            <div class="posQuery">
-                <ul>
-                    <li v-for="item in posList">
-                        <p>{{checkStatus}}序列号：{{item.posSn}}</p>
-                        <!-- <span v-if="item.status=='ASSIGN'">分配</span>
-                        <span v-else>未分配</span> -->
-                        <span>{{item.status=='ASSIGN'?'分配':'未分配'}}</span>
-                        <a v-if="item.status=='ASSIGN'" href="javascript:;" @click="comfirm_toggle()">解除绑定</a>
-                    </li>      
-                </ul>
-            </div>
+            <scroller :on-refresh="refresh"
+            :on-infinite="infinite">
+            
+                <div class="posQuery">
+                    <ul>
+                        <li v-for="item in posList">
+                            <p>{{checkStatus}}序列号：{{item.posSn}}</p>
+                            <!-- <span v-if="item.status=='ASSIGN'">分配</span>
+                            <span v-else>未分配</span> -->
+                            <span>{{item.status=='ASSIGN'?'分配':'未分配'}}</span>
+                            <a v-if="item.status=='ASSIGN'" href="javascript:;" @click="comfirm_toggle()">解除绑定</a>
+                        </li>      
+                    </ul>
+                </div>
+            </scroller>    
 
             <comfirm-box
                 @comfirm_toggle="comfirm_toggle"
